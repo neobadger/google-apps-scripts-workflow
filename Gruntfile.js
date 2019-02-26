@@ -9,14 +9,15 @@ module.exports = function(grunt) {
       uses_defaults: {}
     },
 
-    // Concatenate JavaScript Files.
-    concat: {
-      bar: {
-        src: ['app/**/*.js'],
-        dest: 'script/script.js'
+    import: {
+      options: {},
+      dist: {
+        src: 'app/app.js',
+        dest: 'script/script.js',
       }
     },
 
+    // Transpile concatenated file.  
     babel: {
       options: {
         sourceMap: false,
@@ -33,8 +34,9 @@ module.exports = function(grunt) {
 
   // Load Grunt plugins.
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-import');
 
   // Default task(s).
-  grunt.registerTask('default', ['concat', 'babel']);
+  grunt.registerTask('default', ['import', 'babel']);
 
 };

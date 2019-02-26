@@ -14,7 +14,7 @@
     "@babel/preset-env": "^7.3.4",
     "grunt": "^1.0.3",
     "grunt-babel": "^8.0.0",
-    "grunt-contrib-concat": "^1.0.1",
+    "grunt-import": "^1.0.3",
     "load-grunt-tasks": "^4.0.0"
   },
   "dependencies": {}

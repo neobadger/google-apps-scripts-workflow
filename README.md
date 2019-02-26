@@ -1,7 +1,7 @@
 # Google Apps Script - Development Template
 This project was created to make the development of [Google Apps Script](https://developers.google.com/apps-script/) (including [Google Ads Script](https://developers.google.com/google-ads/scripts/)) a more joyful experience. Currently, Google Apps Script does not currently support ES6 syntax (at the time of commit), making the developer experience more painful than watching Brittney Spears [make life decisions in 2007](https://en.wikipedia.org/wiki/Britney_Spears#2006%E2%80%932007:_Personal_struggles_and_Blackout).
 
-As such, to bring Google Apps Script into 2019, this development workflow template will allow you write modular, ES6 code which is concatenated and transpiled, ready for you to upload to a Google Ads/Google Apps environment. 
+As such, to bring Google Apps Script into 2019, this development workflow template will allow you write modular, ES6 code which gets dynamically imported into a single file, and transpiled ready for you to upload to a Google Ads/Google Apps environment. 
 
 
 ## Installation 
@@ -11,22 +11,23 @@ Note that you will need to have [NodeJS](https://nodejs.org/) installed to use t
 npm install && npm install -g grunt-cli
 ```
 
-
 ## File Structure
-The directory structure is functionally similar to the `src` and `dist` architecture in that all `.js` files in the `src` directory will be concatenated and dropped into the `/script/script.js` file where it gets transpiled. 
+The directory structure is functionally similar to the `src` and `dist` architecture in that all your development files are housed in the `/app` directory and, when ready for deployment, your modules are dynamically imported into your `app.js` and dropped in `script.js` (in the `/script` directory) where it gets transpiled to Apps Script friendly syntax. 
 
 ```
+root
 ├───app
 │   ├───core
 │   └───helper
 └───script
 ```
-The `/app/core` directory is meant to contain Google Aps Script syntax specific to the Apps Script runtime; Keeping this separate will allow you to keep your code modular and reusable. Similarly, the `/app/helper` directory can house any polyfills that you don't want to handle though Babel; Alternatively, you might choose to keep any functions which often get repeated, or contain generic boilerplate here so you don't pollute your primary logic body. 
 
-Speaking of 'primary logic', the `/app/app.js` file will contain the `main()` function which is the main entry point for the Google Ads Script runtime. This can be removed if you are creating Google Apps Script, though it may still be useful to keep as this the first in the concatenation queue and might be suitable for centralizing the core logic of your application. 
+The `/app/core` directory is meant to contain Google Apps Script syntax, specific to the Apps Script runtime; keeping this separate will allow you to keep your code modular and reusable. Similarly, the `/app/helper` directory can house any polyfills that you don't want to handle though Babel. Alternatively, you might choose to keep any logic which often gets repeated or contains boilerplate code here so you don't pollute your primary logic body (#DRY) managed in the `/app/app.js` file. 
+
+The `/app/app.js` file is the entry point for the compilation Grunt tasks and, if deployed in Google Ads, the Google Ads Script runtime (via the `main()` function). Your modules can be imported dynamically and inlined into the output file by using the `@import` syntax (provisioned by the [grunt-import](https://www.npmjs.com/package/grunt-import) package). 
 
 ## Usage
-When you are ready to take your development files to production, you can use the `grunt` CLI command to run the default task which will concatenate and transpile your files. If you want to move this iff the default task you can edit the `Gruntfile.js` file.
+When you are ready to take your development files to production, you can use the `grunt` CLI command to run the default task which will import all modules specified in `app/app.js` and transpile your output file (`script/script.js`). If you want to move this off the default task you can edit the `Gruntfile.js` config file.
 
 ## Contributing
 Pull requests are welcome (especially as this project is more a sketch than a fully-fledged application workflow). For major changes, please open an issue first to discuss what you would like to change. 
