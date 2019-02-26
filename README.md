@@ -1,11 +1,11 @@
 # Google Apps Script - Development Template
-This project was created to make the development of [Google Apps Script](https://developers.google.com/apps-script/) (including [Google Ads Script](https://developers.google.com/google-ads/scripts/)) a more joyful experience. Currently, Google Apps Script does not currently support ES6 syntax (at the time of commit), making the developer experience more painful than watching Brittney Spears make life decisions in 2007.
+This project was created to make the development of [Google Apps Script](https://developers.google.com/apps-script/) (including [Google Ads Script](https://developers.google.com/google-ads/scripts/)) a more joyful experience. Currently, Google Apps Script does not currently support ES6 syntax (at the time of commit), making the developer experience more painful than watching Brittney Spears [make life decisions in 2007](https://en.wikipedia.org/wiki/Britney_Spears#2006%E2%80%932007:_Personal_struggles_and_Blackout).
 
 As such, to bring Google Apps Script into 2019, this development workflow template will allow you write modular, ES6 code which is concatenated and transpiled, ready for you to upload to a Google Ads/Google Apps environment. 
 
 
 ## Installation 
-Note that you will need to have [NodeJS](https://nodejs.org/) installed to use this project This project depends on  [Grunt CLI](https://github.com/gruntjs/grunt-cli) to initiate the execution of tasks. 
+Note that you will need to have [NodeJS](https://nodejs.org/) installed to use this project. This project depends on  [Grunt CLI](https://github.com/gruntjs/grunt-cli) to initiate the execution of tasks. 
 
 ```
 npm install && npm install -g grunt-cli
