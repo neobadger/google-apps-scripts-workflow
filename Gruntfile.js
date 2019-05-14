@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-
   require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
 
   // Project configuration.
@@ -10,46 +9,43 @@ module.exports = function(grunt) {
     },
 
     /*********************************
-     * Import Modules 
+     * Import Modules
      *********************************/
     import: {
       options: {},
       script: {
         src: 'app/app.js',
-        dest: 'script/script.js',
+        dest: 'script/script.js'
       },
       module: {
         src: 'app/modules.js',
-        dest: 'script/modules.js',
+        dest: 'script/modules.js'
       }
     },
 
     /*********************************
-     * Concatenate Files 
+     * Concatenate Files
      *********************************/
     concat: {
       // Modules only, split output.
       modules: {
-        src: [
-          'app/**/*.js',
-          '!app/app.js' 
-        ],
+        src: ['app/**/*.js', '!app/app.js'],
         dest: 'script/modules.js'
       },
       // Main only, split output.
       main: {
-        src: ['app/app.js'], 
+        src: ['app/app.js'],
         dest: 'script/script.js'
       },
       // All app files, single script output.
       all: {
-        src: ['app/**/*.js'], 
+        src: ['app/**/*.js'],
         dest: 'script/script.js'
       }
     },
 
     /*********************************
-     * Transpile Files 
+     * Transpile Files
      *********************************/
     babel: {
       options: {
@@ -73,8 +69,20 @@ module.exports = function(grunt) {
           'script/modules.js': 'script/modules.js'
         }
       }
+    },
+
+    /*********************************
+     * Watch for Changes to Dev Files
+     *********************************/
+    watch: {
+      scripts: {
+        files: ['app/app.js'], // <-- change this based on your dev workflow
+        tasks: ['default'], // <-- change this based on your dev workflow
+        options: {
+          spawn: false
+        }
+      }
     }
-    
   });
 
   /*********************************
@@ -82,22 +90,25 @@ module.exports = function(grunt) {
    *********************************/
   grunt.loadNpmTasks('grunt-import');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-    /*********************************
+  /*********************************
    * Define Tasks
    *********************************/
-  
+
   // Default task(s).
-  grunt.registerTask('default', ['import:dist', 'babel:main']);
+  grunt.registerTask('default', ['import:script', 'babel:main']);
 
   // Import modules into `module.js` file and transpile `app,js` and `module.js` .
   grunt.registerTask('export_manual', ['import:module', 'babel:manual']);
 
-  // Break the main script and modules into two separate files, and transpile them. 
-  grunt.registerTask('export_modular', ['concat:modules', 'concat:main', 'babel:split']);
+  // Break the main script and modules into two separate files, and transpile them.
+  grunt.registerTask('export_modular', [
+    'concat:modules',
+    'concat:main',
+    'babel:split'
+  ]);
 
-  // Bundles all files and transpile the content 
+  // Bundles all files and transpile the content
   grunt.registerTask('export_all', ['concat:all', 'babel:main']);
-
 };

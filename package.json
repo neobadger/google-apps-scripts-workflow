@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "grunt watch"
   },
   "keywords": [],
   "author": "James Nicholson <neo@neobadger.com>",
@@ -12,9 +12,10 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
-    "grunt": "^1.0.3",
+    "grunt": "^1.0.4",
     "grunt-babel": "^8.0.0",
     "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-import": "^1.0.3",
     "load-grunt-tasks": "^4.0.0"
   },
